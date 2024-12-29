@@ -56,6 +56,7 @@
         .topbar div a:focus {
             color: #007bff; 
         }
+
         .content {
             padding: 20px;
             margin: 100px auto; 
@@ -65,23 +66,55 @@
             border-radius: 8px; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
         }
+
         .content .subtitle {
             font-style: italic;
             color: #555;
         }
+
         .gallery {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
+
         .gallery a {
             width: calc(33.33% - 10px);
             box-sizing: border-box;
+            position: relative;
         }
+
         .gallery img {
-            width: calc(100% - 10px);
-            box-sizing: border-box;
+            width: 100%;
+            height: auto;
+            transition: opacity 0.3s ease;
         }
+
+        .gallery .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        .gallery a:hover img {
+            opacity: 0.7;
+        }
+
+        .gallery a:hover .overlay {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -120,6 +153,32 @@
 
             .gallery img {
                 width: 100%;
+                transition: opacity 0.3s ease;
+            }
+
+            .gallery a .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5); 
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                font-size: 1.5em;
+                text-align: center;
+            }
+
+            .gallery a:hover img {
+                opacity: 0.7;
+            }
+
+            .gallery a:hover .overlay {
+                opacity: 1;
             }
         }
     </style>
@@ -144,12 +203,8 @@
             <div class="gallery">
                 <a href="https://github.com/mario11gd/website" target="_blank">
                     <img src="../static/repository/website.png" alt="Website">
-                </a>                
-                <a style="display: none;"><img src="" alt="Photo 2"></a>
-                <a style="display: none;"><img src="" alt="Photo 2"></a>
-                <a style="display: none;"><img src="" alt="Photo 2"></a>
-                <a style="display: none;"><img src="" alt="Photo 2"></a>
-                <a style="display: none;"><img src="" alt="Photo 2"></a>
+                    <div class="overlay">Website</div>
+                </a>
             </div>
         </main>
     </div>
