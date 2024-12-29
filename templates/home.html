@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" href="../static/mg.png" type="image/png">
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            z-index: 1000;
+            box-sizing: border-box;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .topbar div {
+            display: flex;
+        }
+
+        .topbar .name {
+            font-weight: bold;
+            font-size: 2em;
+        }
+
+        .topbar .name a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .topbar div a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #000; 
+            white-space: nowrap;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .topbar div a:hover {
+            color: #007bff; 
+        }
+
+        .topbar div a:focus {
+            color: #007bff; 
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            margin: 100px auto; 
+            width: 80%; 
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 8px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+
+        .left {
+            text-align: center;
+            width: 40%;
+        }
+
+        .left img {
+            width: 80%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            text-decoration: none;
+            color: black;
+        }
+        .icons .icon {
+            width: 40px;
+            height: 40px;
+        }
+        .right {
+            width: 55%;
+            font-size: 1.3em;
+        }
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; 
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 5px;
+            }
+
+            .topbar .name {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+
+            .topbar div a {
+                font-size: 1em;
+                margin-left: 10px;
+            }
+
+            .content {
+                flex-direction: column;
+                width: 90%;
+                margin: 120px auto;
+                padding: 10px;
+            }
+
+            .left {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .left img {
+                width: 70%;
+                margin: 0 auto;
+            }
+
+            .right {
+                width: 100%;
+                font-size: 1.1em;
+            }
+
+            .icons {
+                gap: 15px;
+            }
+
+            .icons a {
+                width: 35px;
+                height: 35px;
+            }
+        }   
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="name"><a href="/home">Mario Gutiérrez</a></div>
+        <div>
+            <a href="/home">Home</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/cv">CV</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="left">
+            <img src="../static/mario.jpg" alt="Photo">
+            <div class="icons">
+                <a href="mailto:mariogutierrezcto@gmail.com"><img src="../static/email.png" class="icon" alt="Mail"></a>
+                <a href="https://www.linkedin.com/in/mariogutierrezdelgado/" target="_blank"><img src="../static/linkedin.png" class="icon" alt="LinkedIn"></a>
+                <a href="https://github.com/mario11gd"><img src="../static/github.png" class="icon" alt="GitHub"></a>
+            </div>
+        </div>
+        <div class="right">
+            <h1>Welcome to my website</h1>
+            <p>I am a Data Engineer from the Polytechnic University of Madrid, with a passion for sports, especially basketball, and enjoying nature through hiking. I also love engaging in cultural activities such as visiting the theater, museums, and exploring new places.</p>
+            <p>My professional interests lie in cybersecurity and machine learning, and I am dedicated to exploring how these fields can be connected with social aspects to improve people's lives.</p>
+            <p>With a strong leadership ability and a keen attention to detail, I thrive in collaborative team environments and enjoy working towards impactful solutions.</p>
+            <h2>Professional Experience</h2>
+            <ul>
+                <li><strong>Research Intern on FCAS - Risk Assessment Framework Development</strong> - RSTI Research Group, ETSIT UPM (2024 - present)</li>
+            </ul>
+
+            <h2>Education</h2>
+            <ul>
+                <li><strong>Bachelor's in Data Engineering</strong> - Polytechnic University of Madrid (2022 - present)</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
