@@ -10,15 +10,6 @@ def main():
 def home():
     return render_template('home.html')
 
-@app.route('/gallery')
-def gallery():
-    return render_template('gallery.html')
-
-@app.route('/gallery/<photo>')
-def photo(photo):
-    template = 'photo_' + photo +'.html'
-    return render_template(template)
-
 @app.route('/portfolio')
 def portfolio():
     return render_template('portfolio.html')
