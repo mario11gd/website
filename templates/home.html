@@ -57,12 +57,34 @@
         .topbar div a:focus {
             color: #007bff; 
         }
-
+        .announcement-bar {
+            width: 100%;
+            background-color: rgb(211, 211, 211); 
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            top: 80px; 
+            left: 0;
+            z-index: 999; 
+            overflow: hidden;
+        }
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+            font-size: 1.1em;
+            color: #000;
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
         .content {
             display: flex;
             justify-content: space-between;
             padding: 20px;
-            margin: 100px auto; 
+            margin: 150px auto;
             width: 80%; 
             box-sizing: border-box;
             background-color: #fff;
@@ -169,7 +191,11 @@
             <a href="/contact">Contact</a>
         </div>
     </div>
-
+    <div class="announcement-bar">
+        <div class="marquee">
+            <strong>Announcement:</strong> Updates to the website are coming soon! Stay tuned for new features and improvements
+        </div>
+    </div>
     <div class="content">
         <div class="left">
             <img src="../static/mario.jpg" alt="Photo">
