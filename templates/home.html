@@ -6,224 +6,657 @@
     <title>Home</title>
     <link rel="icon" href="../static/mg.png" type="image/png">
     <style>
-        body {
-            display: flex;
-            margin: 0;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        @font-face {
+            font-family: 'ByteBounce';
+            src: url("../static/fonts/ByteBounce.ttf");
         }
-
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'ByteBounce';
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
         .topbar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 10px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #fff;
-            z-index: 1000;
-            box-sizing: border-box;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .topbar div {
-            display: flex;
-        }
-
-        .topbar .name {
-            font-weight: bold;
-            font-size: 2em;
-        }
-
-        .topbar .name a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .topbar div a {
-            margin-left: 15px;
-            text-decoration: none;
-            color: #000; 
-            white-space: nowrap;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-
-        .topbar div a:hover {
-            color: #007bff; 
-        }
-
-        .topbar div a:focus {
-            color: #007bff; 
-        }
-        .announcement-bar {
-            width: 100%;
-            background-color: rgb(211, 211, 211); 
-            padding: 10px 0;
-            text-align: center;
-            position: fixed;
-            top: 80px; 
-            left: 0;
-            z-index: 999; 
-            overflow: hidden;
-        }
-        .marquee {
-            display: inline-block;
-            white-space: nowrap;
-            padding-left: 100%;
-            animation: marquee 25s linear infinite;
-            font-size: 1.1em;
-            color: #000;
-        }
-        @keyframes marquee {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            margin: 2vh 20vw;
+            border-bottom: 1px solid;
+            padding-bottom: 2vh;
+            font-size: 4vw;
         }
         .content {
+            margin: 2vh 22vw;
+        }
+        .profile {
+            border: 1px solid;
+            border-radius: 0.3vw;
+            padding: 0.5vh 0.5vw;
+        }
+        .profile .header {
             display: flex;
             justify-content: space-between;
-            padding: 20px;
-            margin: 150px auto 10px;
-            width: 80%; 
-            box-sizing: border-box;
-            background-color: #fff;
-            border-radius: 8px; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            align-items: center;
         }
-
-        .left {
-            text-align: center;
-            width: 40%;
+        .profile .name {
+            font-size: 3.5vw;
         }
-
-        .left img {
-            width: 80%;
+        .profile .icons {
+            margin-top: 0;
+        }
+        .profile .location {
+            display: flex;
+            align-items: center;
+        }
+        .profile .location img {
+            width: 1.5vw;
             height: auto;
-            border-radius: 50%;
         }
-
+        .profile .location span {
+            font-size: 2vw;
+            color: gray;
+        }
+        .profile .description {
+            font-size: 2vw;
+            margin-top: 1vh;    
+            text-align: justify;
+        }
+        .experience {
+            margin-top: 2vh;
+        }
+        .title {
+            font-size: 3vw;
+            font-weight: bold;
+        }
+        .experience .jobs {
+            position: relative;
+            margin: 2vh auto;
+        }
+        .experience .jobs .job {
+            display: flex;
+            flex-direction: column;
+        }
+        .experience .jobs .job-details::before {
+            content: ">";
+        }
+        .experience .jobs .job-details {
+            display: flex;
+            justify-content: flex-start;
+            gap: 0.5vw;
+            align-items: baseline;
+            text-align: justify;
+        }
+        .experience .jobs .job .job-title {
+            font-size: 2vw;
+        }
+        .experience .jobs .job .job-duration {
+            font-size: 1.5vw;
+            color: gray;
+        }
+        .experience .jobs .job .job-description {
+            font-size: 1.7vw;
+            margin-top: 0.5vh;
+            min-height: 55px;
+            text-align: justify;
+        }
+        .typewriter::after {
+            content: "|";
+            animation: blink 1s steps(1) infinite;
+            margin-left: 2px;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .technologies-marquee {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            margin-top: 1vh;
+            /* Aquí está la máscara */
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
+        .technologies-list {
+            display: flex;
+            gap: 2vw;
+            width: max-content;
+            animation: marquee-left 25s linear infinite;
+        }
+        @keyframes marquee-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        .technology {
+            display: flex;
+            gap: 0.5vw;
+            align-items: center;
+        }
+        .technology img {
+            height: 3vw;
+            width: auto;       
+        }
+        .technology span {
+            font-size: 1.7vw;
+        }       
+        .technologies-list-reverse {
+            display: flex;
+            gap: 2vw;
+            width: max-content;
+            animation: marquee-right 25s linear infinite;
+        }
+        @keyframes marquee-right {
+            0% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+        .technologies-marquee:hover .technologies-list,
+        .technologies-marquee:hover .technologies-list-reverse {
+            animation-play-state: paused;
+        }
+        .portfolio {
+            margin-top: 2vh;
+        }
+        .portfolio .projects{
+            margin: 2vh 1vw;
+        }
+        .portfolio .project a{
+            display: flex;
+            justify-content: space-between;
+            padding: 1vh 1vw;
+        }
+        .portfolio .project-title {
+            font-size: 1.7vw;
+        }
+        .portfolio .last-modified {
+            font-size: 1.3vw;
+        }
+        .portfolio .project:hover {
+            cursor: pointer;
+            transform: scale(1.02);
+            background-color: #808080;
+            border-radius: 0.3vw;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .portfolio .and-more {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1vh;
+        }
+        .portfolio .and-more a {
+            font-size: 1.7vw;
+        }
+        .portfolio .and-more a:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+        .about-me {
+            min-height: 170px;
+        }
+        .about-me .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1vw;
+        }
+        .about-me .header img{
+            cursor: pointer;
+            height: 1.5vw;
+            width: auto;
+        }
+        .about-me .description {
+            font-size: 1.7vw;
+            margin-top: 1vh;
+            text-align: justify;
+        }
+        .dark-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+        }
+        .downloader {
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            padding: 2vh 3vw;
+            border-radius: 0.5vw;
+        }
+        .downloader .close-btn {
+            align-self: flex-end;
+            font-size: 1.7vw;
+        }
+        .downloader .close-btn:hover {
+            cursor: pointer;
+        }
+        .downloader .title {
+            font-size: 1.7vw;
+            font-weight: normal;
+            margin-bottom: 1vh;
+        }
+        .downloader .download-btns {
+            display: flex;
+            justify-content: space-between;
+            gap: 2vw;
+        }
+        .downloader .download-btn {
+            padding: 0.5vh 1vw;
+            font-size: 1.5vw;
+        }
+        .downloader .download-btn:hover {
+            transform: scale(1.03);
+            background-color: #808080;
+            border-radius: 0.5vw;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .footer {
+            padding-top: 1vh;
+        }
+        .footer .title {
+            margin-bottom: 2vh;
+        }
+        .footer .title span{
+            font-size: 4vw;
+        }
+        .footer .description {
+            font-size: 1.7vw;
+            text-align: justify;
+        }
         .icons {
             margin-top: 20px;
             display: flex;
             justify-content: center;
-            gap: 20px;
-        }
-
-        .icons a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            text-align: center;
-            line-height: 40px;
-            text-decoration: none;
-            color: black;
+            gap: 1vw;
         }
         .icons .icon {
-            width: 40px;
-            height: 40px;
+            width: 2vw;
+            height: auto;
         }
-        .right {
-            width: 55%;
-            font-size: 1.3em;
-        }
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column; 
-            }
-
-            .topbar {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 10px 5px;
-            }
-
-            .topbar .name {
-                font-size: 1.5em;
-                margin-bottom: 10px;
-            }
-
-            .topbar div a {
-                font-size: 1em;
-                margin-left: 10px;
-            }
-            .marquee {
-                font-size: 0.5em;
-                animation: marquee 15s linear infinite;
-            }
-            .content {
-                flex-direction: column;
-                width: 90%;
-                margin: 150px auto 10px;
-                padding: 10px;
-            }
-
-            .left {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            .left img {
-                width: 70%;
-                margin: 0 auto;
-            }
-
-            .right {
-                width: 100%;
-                font-size: 1.1em;
-            }
-
-            .icons {
-                gap: 15px;
-            }
-
-            .icons a {
-                width: 35px;
-                height: 35px;
-            }
-        }   
     </style>
 </head>
 <body>
     <div class="topbar">
-        <div class="name"><a href="/home">Mario Gutiérrez</a></div>
-        <div>
-            <a href="/home">Home</a>
-            <a href="/portfolio">Portfolio</a>
-            <a href="/cv">CV</a>
-            <a href="/contact">Contact</a>
-        </div>
-    </div>
-    <div class="announcement-bar">
-        <div class="marquee">
-            <strong>Announcement:</strong> Updates to the website are coming soon! Stay tuned for new features and improvements
-        </div>
+        <div class="name"><a href="/">Mario Gutiérrez</a></div>
     </div>
     <div class="content">
-        <div class="left">
-            <img src="../static/mario.jpg" alt="Photo">
+        <div class="profile">
+            <div class="header">
+                <div class="name">
+                    Mario Gutiérrez
+                </div>
+                <div class="icons">
+                    <a href="mailto:mariogutierrezcto@gmail.com"><img src="../static/email.png" class="icon" alt="Mail"></a>
+                    <a href="https://www.linkedin.com/in/mariogutierrezdelgado/" target="_blank"><img src="../static/linkedin.png" class="icon" alt="LinkedIn"></a>
+                    <a href="https://github.com/mario11gd"><img src="../static/github.png" class="icon" alt="GitHub"></a>
+                </div>
+            </div>
+            <div class="location">
+                <img src="../static/location.png" alt="Location">
+                <span>Madrid, Spain</span>
+            </div>
+            <div class="description">
+                I am a data engineer with a passion for building and integrating applications and services that use data to solve problems. I am particularly interested in artificial intelligence and machine learning.
+            </div>
+        </div>
+        <div class="experience">
+            <div class="title">
+                Experience
+            </div>
+            <div class="jobs">
+                <div class="job">
+                    <div class="job-details">
+                        <div class="job-title">Research Intern in Universidad Politécnica de Madrid</div>
+                        <div class="job-duration">Nov 2024 - Present</div>
+                    </div>
+                    <div class="job-description typewriter">
+                        Developing a dashboard to visualize cyberthreats for the FCAS - Risk Assessment Framework Development project, using Flask to build a web application that integrates with both MongoDB and Elasticsearch databases. 
+                    </div>
+                </div>
+                <div class="job">
+
+                </div>
+            </div>
+        </div>
+        <div class="technologies">
+            <div class="title">
+                What I work with
+            </div>
+            <div class="technologies-marquee">
+                <div class="technologies-list">
+                    <div class="technology">
+                        <img src="../static/python.png" alt="Python">
+                        <span>Python</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/docker.png" alt="Docker">
+                        <span>Docker</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/kubernetes.png" alt="Kubernetes">
+                        <span>Kubernetes</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/spark.png" alt="Spark">
+                        <span>Apache Spark</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/kafka.png" alt="Kafka">
+                        <span>Apache Kafka</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/nifi.png" alt="Nifi">
+                        <span>Apache Nifi</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/flask.png" alt="Flask">
+                        <span>Flask</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/scala.png" alt="Scala">
+                        <span>Scala</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/postgresql.png" alt="PostgreSQL">
+                        <span>PostgreSQL</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/mongo.png" alt="MongoDB">
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/elastic.png" alt="Elasticsearch">
+                        <span>Elasticsearch</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/python.png" alt="Python">
+                        <span>Python</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/docker.png" alt="Docker">
+                        <span>Docker</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/kubernetes.png" alt="Kubernetes">
+                        <span>Kubernetes</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/spark.png" alt="Spark">
+                        <span>Apache Spark</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/kafka.png" alt="Kafka">
+                        <span>Apache Kafka</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/nifi.png" alt="Nifi">
+                        <span>Apache Nifi</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/flask.png" alt="Flask">
+                        <span>Flask</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/scala.png" alt="Scala">
+                        <span>Scala</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/sql.png" alt="SQL">
+                        <span>SQL</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/mongo.png" alt="MongoDB">
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/elastic.png" alt="Elasticsearch">
+                        <span>Elasticsearch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="technologies-marquee">
+                <div class="technologies-list-reverse">
+                    <div class="technology">
+                        <img src="../static/python.png" alt="Python">
+                        <span>Python</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/docker.png" alt="Docker">
+                        <span>Docker</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/kubernetes.png" alt="Kubernetes">
+                        <span>Kubernetes</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/spark.png" alt="Spark">
+                        <span>Apache Spark</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/kafka.png" alt="Kafka">
+                        <span>Apache Kafka</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/nifi.png" alt="Nifi">
+                        <span>Apache Nifi</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/flask.png" alt="Flask">
+                        <span>Flask</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/scala.png" alt="Scala">
+                        <span>Scala</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/postgresql.png" alt="PostgreSQL">
+                        <span>PostgreSQL</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/mongo.png" alt="MongoDB">
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/elastic.png" alt="Elasticsearch">
+                        <span>Elasticsearch</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/python.png" alt="Python">
+                        <span>Python</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/docker.png" alt="Docker">
+                        <span>Docker</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/kubernetes.png" alt="Kubernetes">
+                        <span>Kubernetes</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/spark.png" alt="Spark">
+                        <span>Apache Spark</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/kafka.png" alt="Kafka">
+                        <span>Apache Kafka</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/nifi.png" alt="Nifi">
+                        <span>Apache Nifi</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/flask.png" alt="Flask">
+                        <span>Flask</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/scala.png" alt="Scala">
+                        <span>Scala</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/sql.png" alt="SQL">
+                        <span>SQL</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/mongo.png" alt="MongoDB">
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="technology">
+                        <img src="../static/elastic.png" alt="Elasticsearch">
+                        <span>Elasticsearch</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio">
+            <div class="title">
+                Portfolio
+            </div>
+            <div class="projects">
+                <div class="project">
+                    <a href="https://github.com/mario11gd/face-recognition-stream">
+                        <div class="project-title">
+                        face-recognition-stream
+                    </div>
+                    <div class="last-modified">
+                        Last modified: 22-06-2025
+                    </div>
+                    </a>
+                </div>
+                <div class="project">
+                    <a href="https://github.com/mario11gd/dudasETSIT">
+                        <div class="project-title">
+                            dudasETSIT
+                        </div>
+                        <div class="last-modified">
+                            Last modified: 22-06-2025
+                        </div>
+                    </a>
+                </div>
+                <div class="project">
+                    <a href="https://github.com/mario11gd/Website">
+                        <div class="project-title">
+                            Website
+                        </div>
+                        <div class="last-modified">
+                            Last modified: 04-07-2025
+                        </div>
+                    </a>
+                </div>
+                <div class="and-more">
+                    <a href="https://github.com/mario11gd">
+                        And more ...
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="about-me">
+            <div class="header">
+                <div class="title">
+                    About me
+                </div>
+                <img src="../static/arrow.png" alt="Download CV" onclick=downloadCV()>
+            </div>
+            <div class="description typewriter">
+                Hello! I am Mario Gutiérrez, a data engineer from Universidad Politécnica de Madrid. I am passionate about the importance of data
+                in today's world and how it can be used to solve problems and make everyone's life easier. I am particularly interested in artificial 
+                intelligence and machine learning. Personally, I consider myself a curious person, who enjoys learning and creating new things. Furthermore,
+                I have a particular interest in entrepeneurship and the business world, which I believe is essential to understand how to apply technology
+                in a practical way.
+            </div>
+        </div>
+        <div class="footer">
+            <div class="title" id="footer-title">
+                Let's <span id="footer-dynamic">connect!</span>
+            </div>
+            <div class="description">
+                If you want to get in touch with me, you can do so through my social media profiles or by sending me an email. I am always open to new opportunities and collaborations.
+            </div>
             <div class="icons">
                 <a href="mailto:mariogutierrezcto@gmail.com"><img src="../static/email.png" class="icon" alt="Mail"></a>
-                <a href="https://www.instagram.com/mario11gd"><img src="../static/instagram.png" class="icon" alt="Instagram"></a>
                 <a href="https://www.linkedin.com/in/mariogutierrezdelgado/" target="_blank"><img src="../static/linkedin.png" class="icon" alt="LinkedIn"></a>
                 <a href="https://github.com/mario11gd"><img src="../static/github.png" class="icon" alt="GitHub"></a>
             </div>
         </div>
-        <div class="right">
-            <h1>Welcome to my website</h1>
-            <p>I am a Data Engineer from the Polytechnic University of Madrid, with a passion for sports, especially basketball, and enjoying nature through hiking. I also love engaging in cultural activities such as visiting the theater, museums, and exploring new places.</p>
-            <p>My professional interests lie in cybersecurity and machine learning, and I am dedicated to exploring how these fields can be connected with social aspects to improve people's lives.</p>
-            <p>With a strong leadership ability and a keen attention to detail, I thrive in collaborative team environments and enjoy working towards impactful solutions.</p>
-            <h2>Professional Experience</h2>
-            <ul>
-                <li><strong>Research Intern on FCAS - Risk Assessment Framework Development</strong> - RSTI Research Group, ETSIT UPM (2024 - present)</li>
-            </ul>
-
-            <h2>Education</h2>
-            <ul>
-                <li><strong>Bachelor's in Data Engineering</strong> - Polytechnic University of Madrid (2022 - present)</li>
-            </ul>
+    </div>
+    <div class="dark-background" id="dark" style="display: none;">
+        <div class="downloader">
+            <div class="close-btn" onclick="closeCV()">X</div>
+            <div class="title">
+                > Download my CV
+            </div>
+            <div class="download-btns">
+                <a href="../static/mario_gutierrez_cv.pdf" download class="download-btn">Download CV</a>
+                <a href="../static/mario_gutierrez_cv_spa.pdf" download class="download-btn">Download CV - Spanish version</a>
+            </div>
         </div>
     </div>
 </body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.typewriter').forEach(function(el) {
+        const text = el.textContent;
+        el.textContent = "";
+        let i = 0;
+        let typing = true;
+        let timeoutId;
+
+        function type() {
+            if (!typing) return;
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
+                i++;
+                timeoutId = setTimeout(type, 35);
+            } else {
+                timeoutId = setTimeout(() => {
+                    el.textContent = "";
+                    i = 0;
+                    type();
+                }, 2000);
+            }
+        }
+
+        el.addEventListener('mouseenter', function() {
+            typing = false;
+            clearTimeout(timeoutId);
+            el.textContent = text;
+        });
+
+        el.addEventListener('mouseleave', function() {
+            if (el.textContent === text) {
+                el.textContent = "";
+                i = 0;
+                typing = true;
+                type();
+            }
+        });
+
+        type();
+    });
+});
+function downloadCV() {
+    document.getElementById('dark').style.display = 'flex';
+}
+function closeCV() {
+    document.getElementById('dark').style.display = 'none';
+}
+const footerWords = ["connect!", "create a better world!", "work together!", "discuss ideas!", "build the future!", "share knowledge!"];
+let footerIndex = 0;
+setInterval(() => {
+    footerIndex = (footerIndex + 1) % footerWords.length;
+    document.getElementById("footer-dynamic").textContent = footerWords[footerIndex];
+}, 2200);
+</script>
 </html>
