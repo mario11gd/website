@@ -27,6 +27,12 @@
             padding-bottom: 2vh;
             font-size: 4vw;
         }
+        .topbar .icon {
+            height: 2vw;
+            width: auto;
+            margin-right: 2vw;
+            cursor: pointer;
+        }
         .content {
             margin: 2vh 22vw;
         }
@@ -77,9 +83,6 @@
         .experience .jobs .job {
             display: flex;
             flex-direction: column;
-        }
-        .experience .jobs .job-details::before {
-            content: ">";
         }
         .experience .jobs .job-details {
             display: flex;
@@ -286,11 +289,142 @@
             width: 2vw;
             height: auto;
         }
+        @media (max-width: 768px) {
+            .topbar {
+                margin: 1vh 1vw;
+                font-size: 12vw;
+            }
+            .topbar .icon {
+                height: 5vw;
+                width: auto;
+                margin-right: 1vw;
+            }
+            .content {
+                margin: 1vh 2vw;
+            }
+            .profile {
+                padding: 1vh 1vw;
+            }
+            .profile .name {
+                font-size: 10vw;
+            }
+            .profile .icons {
+                gap: 3vw;
+            }
+            .profile .icons .icon {
+                height: 6vw;
+                width: 6vw;
+            }
+            .profile .location img {
+                width: 4vw;
+                height: auto;
+            }
+            .profile .location span {
+                font-size: 5vw;
+            }
+            .profile .description {
+                font-size: 5vw;
+            }
+            .title {
+                font-size: 9vw;
+            }
+            .experience .jobs .job-details {
+                flex-direction: column;;
+            }
+            .experience .jobs .job .job-title {
+                font-size: 7vw;
+            }
+            .experience .jobs .job .job-duration {
+                font-size: 6vw;
+            }
+            .experience .jobs .job .job-description {
+                font-size: 5vw;
+                min-height: 80px;
+            }
+            .technologies-list {
+                gap: 4vw;
+            }
+            .technologies-list-reverse{
+                gap: 4vw;
+            }
+            .technology img {
+                height: 10vw;
+                width: auto;
+            }
+            .technology span {
+                font-size: 6vw;
+            }
+            .portfolio .project-title {
+                font-size: 6vw;
+            }
+            .portfolio .last-modified {
+                font-size: 5vw;
+            }
+            .portfolio .project:hover {
+                border-radius: 1vw;
+            }
+            .portfolio .and-more a {
+                font-size: 6vw;
+            }
+            .about-me .header {
+                gap: 4vw;
+            }
+            .about-me .header img {
+                height: 4vw;
+                width: auto;
+            }
+            .about-me .description {
+                font-size: 5vw;
+            }
+            .about-me {
+                min-height: 260px;
+            }
+            .downloader .close-btn {
+                font-size: 10vw;
+            }
+            .downloader .title {
+                font-size: 8vw;
+            }
+            .downloader .download-btns {
+                margin-top: 1vh;
+                flex-direction: column;
+                gap: 1vh;
+            }
+            .downloader .download-btn {
+                font-size: 7vw;
+            }
+            .downloader .download-btn:hover {
+                border-radius: 1vw;
+            }
+            .footer .title span{
+                font-size: 12vw;
+            }
+            .footer .title {
+                min-height: 80px;
+            }
+            .footer .description {
+                font-size: 5vw;
+            }
+            .icons {
+                gap: 3vw;
+            }
+            .icons .icon {
+                height: 7vw;
+                width: 7vw;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="topbar">
         <div class="name"><a href="/">Mario Gutiérrez</a></div>
+        <div class="music">
+            <img src="../static/music-off.png" alt="Music" class="icon" onclick="musicON()" title="Enjoy some elevator music!">
+            <img src="../static/music-on.png" alt="Music" style="display: none;" class="icon" onclick="musicOFF()" title="Turn off the music">
+            <audio id="music-audio" autoplay loop>
+                <source src="../static/music/music.mp3" type="audio/mpeg">
+            </audio>
+        </div>
     </div>
     <div class="content">
         <div class="profile">
@@ -319,7 +453,7 @@
             <div class="jobs">
                 <div class="job">
                     <div class="job-details">
-                        <div class="job-title">Research Intern in Universidad Politécnica de Madrid</div>
+                        <div class="job-title">- Research Intern in Universidad Politécnica de Madrid</div>
                         <div class="job-duration">Nov 2024 - Present</div>
                     </div>
                     <div class="job-description typewriter">
@@ -658,5 +792,20 @@ setInterval(() => {
     footerIndex = (footerIndex + 1) % footerWords.length;
     document.getElementById("footer-dynamic").textContent = footerWords[footerIndex];
 }, 2200);
+function musicON() {
+    const audio = document.getElementById('music-audio');
+    audio.muted = false;
+    audio.play();
+    document.querySelector('.music img:nth-child(1)').style.display = 'none';
+    document.querySelector('.music img:nth-child(2)').style.display = 'inline';
+}
+function musicOFF() {
+    const audio = document.getElementById('music-audio');
+    audio.muted = true;
+    audio.pause();
+    document.querySelector('.music img:nth-child(1)').style.display = 'inline';
+    document.querySelector('.music img:nth-child(2)').style.display = 'none';
+}
+musicOFF(); 
 </script>
 </html>
