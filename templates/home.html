@@ -10,6 +10,13 @@
             font-family: 'ByteBounce';
             src: url("../static/fonts/ByteBounce.ttf");
         }
+        @font-face {
+            font-family: 'UbuntuMono-R';
+            src: url("../static/fonts/UbuntuMono-R.ttf");
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
         body {
             background-color: black;
             color: white;
@@ -32,6 +39,10 @@
             width: auto;
             margin-right: 2vw;
             cursor: pointer;
+        }
+        .topbar .topbar-right {
+            display: flex;
+            align-items: center;
         }
         .content {
             margin: 2vh 22vw;
@@ -289,6 +300,84 @@
             width: 2vw;
             height: auto;
         }
+        .terminal-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            font-family: "UbuntuMono-R";
+        }
+        .terminal {
+            height: 450px;
+            width: 600px;
+            font-size: 2vw;
+            overflow-y: auto;
+            box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+            background: rgba(56, 4, 40, 1);
+            border-top-left-radius: 5px;  
+            border-top-right-radius: 5px;  
+            pointer-events: auto;
+            word-break: break-all;
+        }
+        .terminal-header {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            width: 600px;
+            height: 30px;
+            padding: 0 8px;  
+            box-sizing: border-box;  
+            border-top-left-radius: 5px;  
+            border-top-right-radius: 5px;  
+            background: linear-gradient(#504b45 0%,#3c3b37 100%);
+            justify-content: center;
+        }
+        .terminal-title {
+            flex: 1;
+            font-size: 1.2vw;
+            text-align: center;
+        }
+        .terminal-button {
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            padding: 0; 
+            margin-left: auto;
+            margin-right: 1vw;
+            cursor: pointer;
+            font-size: 12px;  
+            height: 15px;  
+            width: 15px;  
+            box-sizing: border-box;  
+            border: none;  
+            border-radius: 100%;  
+            background: linear-gradient(#7d7871 0%, #595953 100%);  
+            text-shadow: 0px 1px 0px rgba(255,255,255,0.2);  
+            box-shadow: 0px 0px 1px 0px #41403A, 0px 1px 1px 0px #474642;
+        }
+        .close {
+            background: linear-gradient(#f37458 0%, #de4c12 100%);    
+            background-clip: padding-box;
+        }
+        .terminal-content {
+            font-size: 1.2vw;
+            padding: 35px 10px 10px 10px;
+        }
+        .query-input {
+            text-decoration: none;
+            border: none;
+            background: transparent;
+            color : white;
+            font-family: 'UbuntuMono-R';
+            font-size: 1.2vw;
+            width: 38ch;
+            outline: none;
+        }
         @media (max-width: 768px) {
             .topbar {
                 margin: 1vh 1vw;
@@ -418,12 +507,18 @@
 <body>
     <div class="topbar">
         <div class="name"><a href="/">Mario Gutiérrez</a></div>
-        <div class="music">
-            <img src="../static/music-off.png" alt="Music" class="icon" onclick="musicON()" title="Enjoy some elevator music!">
-            <img src="../static/music-on.png" alt="Music" style="display: none;" class="icon" onclick="musicOFF()" title="Turn off the music">
-            <audio id="music-audio" autoplay loop>
-                <source src="../static/music/music.mp3" type="audio/mpeg">
-            </audio>
+        <div class="topbar-right">
+            <div class="terminal-trigger">
+                <img src="../static/terminal.png" alt="Terminal" class="icon" title="Open terminal" onclick="openTerminal(0)">
+                <img src="../static/terminal-open.png" alt="Terminal Open" class="icon" title="Open terminal" onclick="openTerminal(2)" style="display: none;">
+            </div>
+            <div class="music">
+                <img src="../static/music-off.png" alt="Music" class="icon" onclick="musicON()" title="Enjoy some elevator music!">
+                <img src="../static/music-on.png" alt="Music" style="display: none;" class="icon" onclick="musicOFF()" title="Turn off the music">
+                <audio id="music-audio" autoplay loop>
+                    <source src="../static/music/music.mp3" type="audio/mpeg">
+                </audio>
+            </div>
         </div>
     </div>
     <div class="content">
@@ -548,8 +643,8 @@
                         <span>Scala</span>
                     </div>
                     <div class="technology">
-                        <img src="../static/sql.png" alt="SQL">
-                        <span>SQL</span>
+                        <img src="../static/postgresql.png" alt="PostgreSQL">
+                        <span>PostgreSQL</span>
                     </div>
                     <div class="technology">
                         <img src="../static/mongo.png" alt="MongoDB">
@@ -640,8 +735,8 @@
                         <span>Scala</span>
                     </div>
                     <div class="technology">
-                        <img src="../static/sql.png" alt="SQL">
-                        <span>SQL</span>
+                        <img src="../static/postgresql.png" alt="PostgreSQL">
+                        <span>PostgreSQL</span>
                     </div>
                     <div class="technology">
                         <img src="../static/mongo.png" alt="MongoDB">
@@ -737,8 +832,29 @@
             </div>
         </div>
     </div>
+    <div class="terminal-container" id="terminal-dark" style="display: none;">
+        <div class="terminal" id="terminal">
+            <div class="terminal-header">
+                <span class="terminal-title">user@mg:~</span>
+                <span class="terminal-button" onclick="openTerminal(2)">-</span>
+                <span class="terminal-button" onclick="openTerminal(3)">+</span>
+                <span class="terminal-button close" onclick='openTerminal(1); document.getElementById("history").innerHTML = "<p>Welcome to my terminal!</p><p>Type <span style=\"color: green;\">help</span> to see available commands.</p>";'>x</span>
+            </div>
+            <div class="terminal-content">
+                <div id="history">
+                    <p>Welcome to my terminal!</p>
+                    <p>Type <span style="color: #7eda28;">help</span> to see available commands.</p>
+                </div>
+                <p id="query"> 
+                    <span style="color: #7eda28;">user@mg</span>:<span style="color:#4878c0">~</span>$ 
+                    <input type="text" class="query-input" id="input" max-length="38" placeholder="Type a command here..." onkeydown="handleKey(event)">
+                </p>
+        </div>
+    </div>
 </body>
 <script>
+let commandHistory = [];
+let historyIndex = -1;
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.typewriter').forEach(function(el) {
         const text = el.textContent;
@@ -807,5 +923,145 @@ function musicOFF() {
     document.querySelector('.music img:nth-child(2)').style.display = 'none';
 }
 musicOFF(); 
+function openTerminal(number) {
+    const input = document.getElementById('input');
+    if (number === 0) {
+        document.getElementById('terminal-dark').style.display = 'flex';
+        document.querySelector('.terminal-trigger img:nth-child(1)').style.display = 'none';
+        document.querySelector('.terminal-trigger img:nth-child(2)').style.display = 'inline';
+        input.focus();
+    } else if (number === 1) {
+        document.getElementById('terminal-dark').style.display = 'none';
+        document.querySelector('.terminal-trigger img:nth-child(1)').style.display = 'inline';
+        document.querySelector('.terminal-trigger img:nth-child(2)').style.display = 'none';
+    } else if (number === 2) {
+        if (document.getElementById('terminal-dark').style.display === 'none') {
+            document.getElementById('terminal-dark').style.display = 'flex';
+            input.focus();
+        } else {
+            document.getElementById('terminal-dark').style.display = 'none';
+        }
+    } else if (number === 3) {
+        if (document.getElementById('terminal').style.width === "100%") {
+            document.getElementById('terminal').style.width = "600px";
+            document.getElementById('terminal').style.height = "450px";
+            document.getElementsByClassName('terminal-header')[0].style.width = "600px";
+            document.getElementsByClassName("query-input")[0].style.width = "38ch";
+        } else {
+            document.getElementById('terminal').style.width = "100%";
+            document.getElementById('terminal').style.height = "100%";
+            document.getElementsByClassName('terminal-header')[0].style.width = "100%";
+            document.getElementsByClassName("query-input")[0].style.width = "150ch";
+        }
+    }
+}
+function commandHandler(command) {
+    const terminal = document.getElementById("terminal");
+    const history = document.getElementById("history");
+    const userLine = document.createElement("p");
+    userLine.innerHTML = `
+        <span style="color: #7eda28;">user@mg</span>:<span style="color:#4878c0">~</span>$ 
+        ${escapeHtml(command)}
+    `;
+    history.appendChild(userLine);
+    terminal.scrollTo(0, document.body.scrollHeight);
+    if (command.trim() === "") return;
+
+    commandHistory.push(command);
+    historyIndex = commandHistory.length;
+    const response = document.createElement("p");
+    if (command.trim() === "help") {
+        response.innerHTML = `
+            <span style="color: #7eda28;">Available commands:</span><br>
+            <span style="color: #7eda28;">- clear</span>: Clear the terminal history.<br>
+            <span style="color: #7eda28;">- download cv</span>: Download my CV.<br>
+            <span style="color: #7eda28;">- download cv -s</span>: Download my CV in Spanish.<br>
+            <span style="color: #7eda28;">- exit</span>: Close the terminal.<br>
+            <span style="color: #7eda28;">- help</span>: Show this help message.<br>
+            <span style="color: #7eda28;">- history</span>: Show command history.<br>
+            <span style="color: #7eda28;">- shortcuts</span>: Show list of shortcuts.<br>
+        `;
+        history.appendChild(response);
+    } else if (command.trim() === "clear") {
+        document.getElementById("history").innerHTML = "";
+    } else if (command.trim() === "download cv") {
+        window.open("../static/mario_gutierrez_cv.pdf", "_blank");
+    } else if (command.trim() === "download cv -s") {
+        window.open("../static/mario_gutierrez_cv_spa.pdf", "_blank");
+    } else if (command.trim() === "exit") {
+        openTerminal(1);
+        document.getElementById("history").innerHTML = `
+            <p>Welcome to my terminal!</p>
+            <p>Type <span style="color: #7eda28;">help</span> to see available commands.</p>
+        `;
+    } else if (command.trim() === "shortcuts") {
+        response.innerHTML = `
+            <span style="color: #7eda28;">Shortcuts:</span><br>
+            <span style="color: #7eda28;">- Shift + T</span>: Open/close the terminal.<br>
+            <span style="color: #7eda28;">- Shift + M</span>: Play/pause the music.<br>
+            <span style="color: #7eda28;">- Arrow Up</span>: Navigate through command history.<br>
+            <span style="color: #7eda28;">- Arrow Down</span>: Navigate through command history.<br>
+        `;
+        history.appendChild(response);
+    } else if (command.trim() === "history") {
+        response.innerHTML = `<span style="color: #7eda28;">Command history:</span><br>`;
+        commandHistory.forEach((cmd, index) => {
+            response.innerHTML += `<span style="color: #7eda28;">${index + 1}.</span> ${escapeHtml(cmd)}<br>`;
+        });
+        history.appendChild(response);
+    } else {
+        response.innerHTML = `<span style="color: red;">Command not found: ${escapeHtml(command)}</span>`;
+        history.appendChild(response);
+    }
+    const input = document.getElementById("input");
+    input.value = "";
+    input.focus();
+    terminal.scrollTo(0, document.body.scrollHeight);
+}
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+function handleKey(event) {
+    const input = document.getElementById("input");
+
+    if (event.key === "Enter") {
+        commandHandler(input.value);
+    } else if (event.key === "ArrowUp") {
+        if (commandHistory.length === 0) return;
+        if (historyIndex > 0) {
+            historyIndex--;
+            input.value = commandHistory[historyIndex];
+        }
+        event.preventDefault();
+    } else if (event.key === "ArrowDown") {
+        if (commandHistory.length === 0) return;
+        if (historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            input.value = commandHistory[historyIndex];
+        } else {
+            historyIndex = commandHistory.length;
+            input.value = "";
+        }
+        event.preventDefault();
+    }
+}
+document.addEventListener("keydown", function(event) {
+      if (event.shiftKey && event.key.toLowerCase() === "t") {
+        event.preventDefault(); 
+        openTerminal(2);
+        document.querySelector('.terminal-trigger img:nth-child(1)').style.display = 'none';
+        document.querySelector('.terminal-trigger img:nth-child(2)').style.display = 'inline';
+      } else if (event.shiftKey && event.key.toLowerCase() === "m") {
+        event.preventDefault(); 
+        if (document.querySelector('.music img:nth-child(1)').style.display === 'none') {
+            musicOFF();
+        } else {
+            musicON();
+        }
+      }
+});
 </script>
 </html>
